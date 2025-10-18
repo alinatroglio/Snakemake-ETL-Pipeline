@@ -68,7 +68,7 @@ When running for the first time, Snakemake executes the ETL workflow automatical
 
 ### 4. Access the Dashboard
 Once containers are up, to see the interactive dashboard, open your browser and navigate to
-[http://0.0.0.0:8501](http://0.0.0.0:8501)
+[http://0.0.0.0:8501](http://127.0.0.1:8501/)
 
 ## Design Choices
 - Snakemake for reproducibility, each step explicitly declares its inputs/outputs, reruns only what changed
