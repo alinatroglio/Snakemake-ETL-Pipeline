@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: postgres-db
+    restart: always
+    ports:
+        - 5430:5432
+    environment:
+        - POSTGRES_DB=patient_data
+        - POSTGRES_PASSWORD=admin
+        - POSTGRES_USER=admin
+    volumes:
+        - db_data:/var/lib/postgresql/data
+  etl:
+    build: .
+    container_name: snakemake-etl
+    volumes:
+      - .:/app
+      - ./shared:/app/shared
+    command: snakemake --cores 1
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://admin:admin@db:5432/patient_data      
+
+  streamlit:
+    build: .
+    container_name: streamlit-dashboard
+    working_dir: /app/scripts
+    command: streamlit run dashboard.py --server.address=0.0.0.0 --server.port=8501
+    ports:
+      - "8501:8501"
+    environment:
+      - DB_URL=postgresql://admin:admin@db:5432/patient_data
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+      
+volumes:
+  db_data:

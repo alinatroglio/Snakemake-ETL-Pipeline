@@ -1,0 +1,6 @@
+mappings:
+  encounter_type: "config/mappings/encounter_type_map.yaml"
+  gender: "config/mappings/gender_map.yaml"
+  id: "config/mappings/id_map.yaml"
+env:
+  db_url: "postgresql://admin:admin@db:5432/patient_data"

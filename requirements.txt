@@ -1,0 +1,7 @@
+snakemake==9.13.2
+pandas==2.3.3
+pint==0.25
+sqlalchemy==2.0.44
+psycopg2-binary==2.9.11
+streamlit==1.50.0
+lxml==6.0.2
